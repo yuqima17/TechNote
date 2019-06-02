@@ -3,7 +3,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechNote.Core", "TechNote.Core\TechNote.Core.csproj", "{92A47BE2-81E0-423C-B1D5-FD10834B27E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechNote.DataAccess.SQL", "TechNote.DataAccess.SQL\TechNote.DataAccess.SQL.csproj", "{CAE6567D-C055-4DD6-B591-65B9A95DFF5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechNote.DataAccess.InMemory", "TechNote.DataAccess.InMemory\TechNote.DataAccess.InMemory.csproj", "{83CB8821-6059-46FD-9702-F5535743F706}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechNote.WebUI", "TechNote.WebUI\TechNote.WebUI.csproj", "{2070BC42-F673-489F-9BAE-A7A379147948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechNote.WebUI.Tests", "TechNote.WebUI.Tests\TechNote.WebUI.Tests.csproj", "{9648B594-07C9-46ED-920D-FE5BE134D1D4}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92A47BE2-81E0-423C-B1D5-FD10834B27E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A47BE2-81E0-423C-B1D5-FD10834B27E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A47BE2-81E0-423C-B1D5-FD10834B27E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A47BE2-81E0-423C-B1D5-FD10834B27E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAE6567D-C055-4DD6-B591-65B9A95DFF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAE6567D-C055-4DD6-B591-65B9A95DFF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAE6567D-C055-4DD6-B591-65B9A95DFF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAE6567D-C055-4DD6-B591-65B9A95DFF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83CB8821-6059-46FD-9702-F5535743F706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83CB8821-6059-46FD-9702-F5535743F706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83CB8821-6059-46FD-9702-F5535743F706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83CB8821-6059-46FD-9702-F5535743F706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2070BC42-F673-489F-9BAE-A7A379147948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2070BC42-F673-489F-9BAE-A7A379147948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2070BC42-F673-489F-9BAE-A7A379147948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2070BC42-F673-489F-9BAE-A7A379147948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9648B594-07C9-46ED-920D-FE5BE134D1D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9648B594-07C9-46ED-920D-FE5BE134D1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9648B594-07C9-46ED-920D-FE5BE134D1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9648B594-07C9-46ED-920D-FE5BE134D1D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
