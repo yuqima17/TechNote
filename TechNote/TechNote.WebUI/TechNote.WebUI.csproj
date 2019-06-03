@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NoteManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,6 +242,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\NoteManager\Index.cshtml" />
+    <Content Include="Views\NoteManager\Create.cshtml" />
+    <Content Include="Views\NoteManager\Details.cshtml" />
+    <Content Include="Views\NoteManager\Edit.cshtml" />
+    <Content Include="Views\NoteManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -257,6 +263,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TechNote.Core\TechNote.Core.csproj">
+      <Project>{92a47be2-81e0-423c-b1d5-fd10834b27e2}</Project>
+      <Name>TechNote.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechNote.DataAccess.InMemory\TechNote.DataAccess.InMemory.csproj">
+      <Project>{83cb8821-6059-46fd-9702-f5535743f706}</Project>
+      <Name>TechNote.DataAccess.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TechNote.DataAccess.SQL\TechNote.DataAccess.SQL.csproj">
+      <Project>{cae6567d-c055-4dd6-b591-65b9a95dff5a}</Project>
+      <Name>TechNote.DataAccess.SQL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
