@@ -26,6 +26,9 @@ namespace TechNote.Core
         [StringLength(2000)]
         public string NoteContent { get; set; }
         //code samples () sample:string of code
+
+        public string CodingLanguage { get; set; }
+        public string Type { get; set; }
         public Note()
         {
             Id = Guid.NewGuid().ToString();

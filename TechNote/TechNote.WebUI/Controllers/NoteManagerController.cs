@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TechNote.Core;
+using TechNote.Core.ViewModels;
 using TechNote.DataAccess;
 using TechNote.DataAccess.InMemory;
 
@@ -12,9 +13,11 @@ namespace TechNote.WebUI.Controllers
     public class NoteManagerController : Controller
     {
         NoteRepository noteContext;
+        CodingLanguageRepository cContext;
         public NoteManagerController()
         {
             noteContext = new NoteRepository();
+            cContext = new CodingLanguageRepository();
         }
         // GET: NoteManager
         public ActionResult Index()
@@ -24,11 +27,14 @@ namespace TechNote.WebUI.Controllers
         }
         public ActionResult Create()
         {
-            return View();
+            NoteViewModel viewModel = new NoteViewModel();
+            viewModel.note = new Note();
+            viewModel.codingLanguages = cContext.Collections().ToList();
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(Note n)
+        public ActionResult Create(NoteViewModel n)
         {
             if (!ModelState.IsValid)
             {
@@ -36,7 +42,7 @@ namespace TechNote.WebUI.Controllers
             }
             else
             {
-                noteContext.Insert(n);
+                noteContext.Insert(n.note);
                 noteContext.Commit();
                 return RedirectToAction("Index");
             }
@@ -59,21 +65,24 @@ namespace TechNote.WebUI.Controllers
         public ActionResult Edit(string id)
         {
             Note noteToEdit = noteContext.Find(id);
+            NoteViewModel viewModel = new NoteViewModel();
+            viewModel.note = noteToEdit;
+            viewModel.codingLanguages = cContext.Collections().ToList();
             if (noteToEdit == null)
             {
                 return HttpNotFound();
             }
             else
             {
-                return View(noteToEdit);
+                return View(viewModel);
             }
                 
         }
 
         [HttpPost]
-        public ActionResult Edit(Note n,String id)
+        public ActionResult Edit(NoteViewModel n,String id)
         {
-            Note noteToEdit = noteContext.Find(n.Id);
+            Note noteToEdit = noteContext.Find(n.note.Id);
             if (noteToEdit == null)
             {
                 return HttpNotFound();
@@ -82,13 +91,13 @@ namespace TechNote.WebUI.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(noteToEdit);
+                    return View(n);
                 }
                 else
                 { 
-                    noteContext.Update(n);
+                    noteContext.Update(n.note);
                     noteContext.Commit();
-                    return RedirectToAction("Details",new { id=n.Id});
+                    return RedirectToAction("Details",new { id=n.note.Id});
                 }
                 
             }

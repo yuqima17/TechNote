@@ -55,6 +55,7 @@ namespace TechNote.DataAccess.InMemory
                 noteUpdate.Description = n.Description;
                 noteUpdate.NoteContent = n.NoteContent;
                 noteUpdate.dateModified = DateTime.Now.ToString();
+                noteUpdate.CodingLanguage = n.CodingLanguage;
             }
         }
         public void Delete(string id)
