@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TechNote.Core.Contracts;
 using TechNote.Core.Models;
 using TechNote.DataAccess.InMemory;
 
@@ -10,10 +11,10 @@ namespace TechNote.WebUI.Controllers
 {
     public class CodingLanguageManagerController : Controller
     {
-        CodingLanguageRepository context;
-        public CodingLanguageManagerController()
+        IRepository<CodingLanguage> context;
+        public CodingLanguageManagerController(IRepository<CodingLanguage> context)
         {
-            context = new CodingLanguageRepository();
+            this.context = context;
         }
        
         // GET: CodingLanguageManager
@@ -60,7 +61,7 @@ namespace TechNote.WebUI.Controllers
             }
             else
             {
-                    context.Update(n);
+                    cToEdit.Name=n.Name;
                     context.Commit();
                     return RedirectToAction("Index");
             }

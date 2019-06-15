@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TechNote.Core;
+using TechNote.Core.Contracts;
+using TechNote.Core.Models;
 using TechNote.Core.ViewModels;
 using TechNote.DataAccess;
 using TechNote.DataAccess.InMemory;
@@ -12,12 +14,12 @@ namespace TechNote.WebUI.Controllers
 {
     public class NoteManagerController : Controller
     {
-        NoteRepository noteContext;
-        CodingLanguageRepository cContext;
-        public NoteManagerController()
+        IRepository<Note> noteContext;
+        IRepository<CodingLanguage> cContext;
+        public NoteManagerController(IRepository<Note> noteContext, IRepository<CodingLanguage> cContext)
         {
-            noteContext = new NoteRepository();
-            cContext = new CodingLanguageRepository();
+            this.noteContext = noteContext;
+            this.cContext = cContext;
         }
         // GET: NoteManager
         public ActionResult Index()
@@ -95,7 +97,11 @@ namespace TechNote.WebUI.Controllers
                 }
                 else
                 { 
-                    noteContext.Update(n.note);
+                    noteToEdit.CodingLanguage=n.note.CodingLanguage;
+                    noteToEdit.dateModified = DateTime.Now.ToString();
+                    noteToEdit.Description = n.note.Description;
+                    noteToEdit.NoteContent = n.note.NoteContent;
+                    noteToEdit.Title = n.note.Title;
                     noteContext.Commit();
                     return RedirectToAction("Details",new { id=n.note.Id});
                 }

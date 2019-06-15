@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace TechNote.Core.Models
 {
-    public class CodingLanguage
+    public class CodingLanguage:BaseEntity
     {
-        public string Id { get; set; }
+        
         public string Name { get; set; }
-        public CodingLanguage()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
+
     }
 }

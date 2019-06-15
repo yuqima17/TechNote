@@ -4,16 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechNote.Core.Models;
 
 namespace TechNote.Core
 {
-    public class Note
+    public class Note:BaseEntity
     {
 
-        public string Id { get; set; }
+
 
        
-        public string dateCreated { get; set; }
+ 
         public string dateModified { get; set; }
 
         [Required]
@@ -29,10 +30,6 @@ namespace TechNote.Core
 
         public string CodingLanguage { get; set; }
         public string Type { get; set; }
-        public Note()
-        {
-            Id = Guid.NewGuid().ToString();
-            dateCreated= DateTime.Today.ToString("dd-MM-yyyy");
-        }
+
     }
 }
