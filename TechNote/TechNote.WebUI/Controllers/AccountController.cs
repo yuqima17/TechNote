@@ -8,6 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using TechNote.Core.Contracts;
+using TechNote.Core.Models;
+using TechNote.DataAccess.SQL;
 using TechNote.WebUI.Models;
 
 namespace TechNote.WebUI.Controllers
@@ -18,14 +21,14 @@ namespace TechNote.WebUI.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        private IRepository<Customer> customerContext;
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(IRepository<Customer> customerContext)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            this.customerContext = customerContext;
         }
 
         public ApplicationSignInManager SignInManager
@@ -156,13 +159,17 @@ namespace TechNote.WebUI.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    Customer customerCreate = new Customer();
+                    customerCreate.NickName = model.NickName;
+
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    customerContext.Insert(customerCreate);
+                    customerContext.Commit();
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
