@@ -30,6 +30,6 @@ namespace TechNote.Core
 
         public string CodingLanguage { get; set; }
         public string Type { get; set; }
-
+        public string UserEmail { get; set; }
     }
 }

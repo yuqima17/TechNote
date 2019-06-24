@@ -61,6 +61,14 @@
     <Compile Include="Migrations\201906232015326_UpdateCustomer.Designer.cs">
       <DependentUpon>201906232015326_UpdateCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906232125509_AddUser.cs" />
+    <Compile Include="Migrations\201906232125509_AddUser.Designer.cs">
+      <DependentUpon>201906232125509_AddUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906232147269_UpdateTables.cs" />
+    <Compile Include="Migrations\201906232147269_UpdateTables.Designer.cs">
+      <DependentUpon>201906232147269_UpdateTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -84,6 +92,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906232015326_UpdateCustomer.resx">
       <DependentUpon>201906232015326_UpdateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906232125509_AddUser.resx">
+      <DependentUpon>201906232125509_AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906232147269_UpdateTables.resx">
+      <DependentUpon>201906232147269_UpdateTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

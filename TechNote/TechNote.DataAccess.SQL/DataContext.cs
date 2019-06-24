@@ -17,6 +17,6 @@ namespace TechNote.DataAccess.SQL
         }
         public DbSet<Note> notes { get; set; }
         public DbSet<CodingLanguage> codingLanguages { get; set; }
-        public DbSet<Customer> customers { get; set; }
+        public DbSet<NoteUser> noteUsers { get; set; }
     }
 }

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace TechNote.Core.Models
 {
-    public class Customer:BaseEntity
+    public class NoteUser:BaseEntity
     {
         public string NickName { get; set; }
 
         public string ImageAddress { get; set; }
+        public string Email { get; set; }
         
     }
 }

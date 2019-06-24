@@ -48,7 +48,7 @@ namespace TechNote.WebUI
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IRepository<Note>,SQLRepository<Note> >();
             container.RegisterType<IRepository<CodingLanguage>, SQLRepository<CodingLanguage>>();
-            container.RegisterType<IRepository<Customer>, SQLRepository<Customer>>();
+            container.RegisterType<IRepository<NoteUser>, SQLRepository<NoteUser>>();
         }
     }
 }

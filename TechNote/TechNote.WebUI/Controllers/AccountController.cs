@@ -21,14 +21,14 @@ namespace TechNote.WebUI.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        private IRepository<Customer> customerContext;
+        private IRepository<NoteUser> userContext;
         public AccountController()
         {
         }
 
-        public AccountController(IRepository<Customer> customerContext)
+        public AccountController(IRepository<NoteUser> userContext)
         {
-            this.customerContext = customerContext;
+            this.userContext = userContext;
         }
 
         public ApplicationSignInManager SignInManager
@@ -159,8 +159,9 @@ namespace TechNote.WebUI.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    Customer customerCreate = new Customer();
-                    customerCreate.NickName = model.NickName;
+                    NoteUser userCreate = new NoteUser();
+                    userCreate.NickName = model.NickName;
+                    userCreate.Email = model.Email;
 
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -168,8 +169,8 @@ namespace TechNote.WebUI.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    customerContext.Insert(customerCreate);
-                    customerContext.Commit();
+                    userContext.Insert(userCreate);
+                    userContext.Commit();
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

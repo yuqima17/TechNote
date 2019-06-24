@@ -15,10 +15,12 @@ namespace TechNote.WebUI.Controllers
 
         IRepository<Note> noteContext;
         IRepository<CodingLanguage> cContext;
-        public HomeController(IRepository<Note> noteContext, IRepository<CodingLanguage> cContext)
+        IRepository<NoteUser> userContext;
+        public HomeController(IRepository<Note> noteContext, IRepository<CodingLanguage> cContext, IRepository<NoteUser> userContext)
         {
             this.noteContext = noteContext;
             this.cContext = cContext;
+            this.userContext = userContext;
         }
         public ActionResult Index(string codingLanguage=null)
         {
@@ -48,6 +50,7 @@ namespace TechNote.WebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(NoteViewModel n)
         {
             if (!ModelState.IsValid)
@@ -56,6 +59,11 @@ namespace TechNote.WebUI.Controllers
             }
             else
             {
+                NoteUser noteUser = userContext.Collections().FirstOrDefault(i => i.Email == User.Identity.Name);
+                if (noteUser != null)
+                {
+                    n.note.UserEmail = noteUser.Email;
+                }
                 noteContext.Insert(n.note);
                 noteContext.Commit();
                 return RedirectToAction("Index");
