@@ -29,7 +29,7 @@ namespace TechNote.Core
         //code samples () sample:string of code
 
         public string CodingLanguage { get; set; }
-        public string Type { get; set; }
+        public string NoteType { get; set; }
         public string UserEmail { get; set; }
     }
 }

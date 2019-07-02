@@ -162,6 +162,7 @@ namespace TechNote.WebUI.Controllers
                     NoteUser userCreate = new NoteUser();
                     userCreate.NickName = model.NickName;
                     userCreate.Email = model.Email;
+                    userCreate.ImageAddress = model.ImageAddress;
 
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -410,6 +411,8 @@ namespace TechNote.WebUI.Controllers
         {
             return View();
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

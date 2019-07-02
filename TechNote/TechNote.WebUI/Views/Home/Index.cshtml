@@ -1,47 +1,65 @@
-﻿@model TechNote.Core.ViewModels.NoteListViewModel
+﻿
+@model TechNote.Core.ViewModels.NoteListViewModel
 
 @{
     ViewBag.Title = "Home";
 }
 
 <h2>Index</h2>
+<ul class="nav navbar-nav">
 
+    @Html.ActionLink("Coding Languages", "Index", "CodingLanguageManager")</li>
+    <li>@Html.ActionLink("Types", "Index", "NoteType")</li>
+    <li>
+
+</ul>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <div class="col-md-2">
-    @Html.ActionLink("All", "Index",null,new { @class = Request["codingLanguage"] == null ? "list-group-item-active" : "list-group-item" })
-    @foreach(var i in Model.codingLanguages)
+    @Html.ActionLink("All", "Index", null, new { @class = Request["codingLanguage"] == null ? "list-group-item-active" : "list-group-item" })
+    @foreach (var i in Model.codingLanguages)
     {
         @Html.ActionLink(i.Name, "Index", new { codingLanguage = i.Name }, new { @class = Request["codingLanguage"] == i.Name ? "list-group-item-active" : "list-group-item" })
     }
 </div>
 <div class="col-md-10">
+    <div class="col-md-12">
+        @Html.ActionLink("All", "Index")
+        @foreach (var item in Model.noteTypes)
+        {
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true">
+                @Html.ActionLink(item.Name, "Index", new { noteType = item.Name, codingLanguage = Request["codingLanguage"] })
+            </button>
+
+        }
+
+    </div>
     <table class="table">
 
-        @foreach (var item in Model.notes)
+        @for (int i = Model.notes.Count - 1; i >= 0; i--)
         {
             <tr>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.dateModified)
+                    @Html.DisplayFor(modelItem => Model.notes[i].dateModified)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.DisplayFor(modelItem => Model.notes[i].Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Html.DisplayFor(modelItem => Model.notes[i].Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NoteContent)
+                    @Html.DisplayFor(modelItem => Model.notes[i].NoteContent)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => Model.notes[i].Id)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.notes[i].Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = Model.notes[i].Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = Model.notes[i].Id })
                 </td>
             </tr>
         }

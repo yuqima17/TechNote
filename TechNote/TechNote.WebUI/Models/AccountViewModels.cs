@@ -82,6 +82,8 @@ namespace TechNote.WebUI.Models
         
         [Required]
         public string NickName { get; set; }
+
+        public string ImageAddress { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201906232147269_UpdateTables.Designer.cs">
       <DependentUpon>201906232147269_UpdateTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906292117417_noteType.cs" />
+    <Compile Include="Migrations\201906292117417_noteType.Designer.cs">
+      <DependentUpon>201906292117417_noteType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906232147269_UpdateTables.resx">
       <DependentUpon>201906232147269_UpdateTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906292117417_noteType.resx">
+      <DependentUpon>201906292117417_noteType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

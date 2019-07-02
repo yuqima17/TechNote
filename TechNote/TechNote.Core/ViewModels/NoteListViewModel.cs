@@ -11,6 +11,7 @@ namespace TechNote.Core.ViewModels
     {
         public List<Note> notes { get; set; }
         public List<CodingLanguage> codingLanguages { get; set; }
+        public List<NoteType> noteTypes { get; set; }
         public NoteListViewModel() { }
     }
 }

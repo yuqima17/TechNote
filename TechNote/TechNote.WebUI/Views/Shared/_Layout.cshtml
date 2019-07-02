@@ -4,8 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/fontawesome")
+    <link href="~/Content/all.css" rel="stylesheet"/>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 
 </head>
 <body>
@@ -17,14 +20,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                <a class="navbar-brand"></a>
+
+                <a href="@Url.Action("Index","Home")" class="navbar-brand"><i class="fas fa-laptop-code"></i>&nbsp <span style="font-weight:bold">TechNote</span></a>
+
+                
+                &nbsp &nbsp &nbsp &nbsp
+                <a href="@Url.Action("Create","Home")" class="navbar-brand"><span style="font-weight:bold">Create&nbsp</span><i class="fas fa-plus-square"></i></a>
+
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Notes", "Index", "NoteManager")</li>
-                    <li>@Html.ActionLink("Coding Languages", "Index", "CodingLanguageManager")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -39,6 +46,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+   
     @RenderSection("scripts", required: false)
 </body>
 </html>

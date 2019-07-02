@@ -44,6 +44,7 @@ namespace TechNote.WebUI.Controllers
             }
             else
             {
+                n.note.dateModified = n.note.createdAt.ToString();
                 noteContext.Insert(n.note);
                 noteContext.Commit();
                 return RedirectToAction("Index");

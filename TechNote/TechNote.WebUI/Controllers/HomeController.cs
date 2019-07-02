@@ -16,35 +16,49 @@ namespace TechNote.WebUI.Controllers
         IRepository<Note> noteContext;
         IRepository<CodingLanguage> cContext;
         IRepository<NoteUser> userContext;
-        public HomeController(IRepository<Note> noteContext, IRepository<CodingLanguage> cContext, IRepository<NoteUser> userContext)
+        IRepository<NoteType> typeContext;
+        public HomeController(IRepository<Note> noteContext, IRepository<CodingLanguage> cContext, IRepository<NoteUser> userContext, IRepository<NoteType> typeContext)
         {
             this.noteContext = noteContext;
             this.cContext = cContext;
             this.userContext = userContext;
+            this.typeContext = typeContext;
         }
-        public ActionResult Index(string codingLanguage=null)
+        public ActionResult Index(string codingLanguage=null,string noteType=null)
         {
             
             List<CodingLanguage> codingLanguages = cContext.Collections().ToList();
+            List<NoteType> noteTypes = typeContext.Collections().ToList();
             List<Note> notes;
-            if (codingLanguage == null)
+            if (codingLanguage == null && noteType==null)
             {
                 notes = noteContext.Collections().ToList();
             }
-            else
+            else if(noteType==null)
             {
                 notes = noteContext.Collections().Where(n => n.CodingLanguage == codingLanguage).ToList();
+            }
+            else if (codingLanguage == null)
+            {
+                notes = noteContext.Collections().Where(n => n.NoteType == noteType).ToList();
+            }
+            else
+            {
+                notes = noteContext.Collections().Where(n => n.NoteType == noteType).Where(n=>n.CodingLanguage==codingLanguage).ToList();
             }
             NoteListViewModel viewModel = new NoteListViewModel();
             viewModel.notes = notes;
             viewModel.codingLanguages = codingLanguages;
+            viewModel.noteTypes = noteTypes;
             return View(viewModel);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             NoteViewModel viewModel = new NoteViewModel();
             viewModel.note = new Note();
+            viewModel.noteTypes = typeContext.Collections().ToList();
             viewModel.codingLanguages = cContext.Collections().ToList();
             return View(viewModel);
         }
@@ -64,6 +78,7 @@ namespace TechNote.WebUI.Controllers
                 {
                     n.note.UserEmail = noteUser.Email;
                 }
+                n.note.dateModified = n.note.createdAt.ToString();
                 noteContext.Insert(n.note);
                 noteContext.Commit();
                 return RedirectToAction("Index");
@@ -83,6 +98,8 @@ namespace TechNote.WebUI.Controllers
             }
 
         }
+
+        [Authorize]
         public ActionResult Edit(string id)
         {
             Note noteToEdit = noteContext.Find(id);
@@ -101,6 +118,7 @@ namespace TechNote.WebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(NoteViewModel n, String id)
         {
             Note noteToEdit = noteContext.Find(n.note.Id);
@@ -129,7 +147,7 @@ namespace TechNote.WebUI.Controllers
 
         }
 
-
+        [Authorize]
         public ActionResult Delete(string id)
         {
             Note noteToDelete = noteContext.Find(id);
@@ -145,6 +163,7 @@ namespace TechNote.WebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ActionName("Delete")]
         public ActionResult ConfirmDelete(string id)
         {

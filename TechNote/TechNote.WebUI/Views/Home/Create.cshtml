@@ -44,7 +44,14 @@
     <div class="form-group">
         @Html.LabelFor(model => model.note.CodingLanguage, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model=>model.note.CodingLanguage,new SelectList(Model.codingLanguages,"Name","Name"),new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.note.CodingLanguage, new SelectList(Model.codingLanguages, "Name", "Name"), new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.note.NoteType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.note.NoteType, new SelectList(Model.noteTypes, "Name", "Name"), new { htmlAttributes = new { @class = "form-control" } })
+
         </div>
     </div>
 
