@@ -18,7 +18,7 @@ namespace TechNote.WebUI.Controllers
         }
         public ActionResult Index()
         {
-            List<NoteType> noteTypes = typeContext.Collections().ToList();
+            List<NoteType> noteTypes = typeContext.Collections().OrderBy(o=>o.Name).ToList();
 
             return View(noteTypes);
         }

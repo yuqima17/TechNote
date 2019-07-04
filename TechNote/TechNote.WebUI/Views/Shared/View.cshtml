@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Left-Nav";
+}
+<div class="nav navbar flex-column " style="background-color:black;margin-top:0px">
+    <li class="nav-item">
+        @Html.ActionLink("All", "Index", null, new { @class = Request["codingLanguage"] == null ? "nav-link active" : "nav-link" })
+    </li>
+
+
+    @foreach (var i in Model.codingLanguages)
+    {
+
+        <li class="nav-item">
+            @Html.ActionLink(i.Name, "Index", new { codingLanguage = i.Name }, new { @class = Request["codingLanguage"] == i.Name ? "nav-link active" : "lnav-link" })
+        </li>
+
+    }
+</div>
+

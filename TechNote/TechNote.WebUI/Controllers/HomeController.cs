@@ -27,24 +27,24 @@ namespace TechNote.WebUI.Controllers
         public ActionResult Index(string codingLanguage=null,string noteType=null)
         {
             
-            List<CodingLanguage> codingLanguages = cContext.Collections().ToList();
-            List<NoteType> noteTypes = typeContext.Collections().ToList();
+            List<CodingLanguage> codingLanguages = cContext.Collections().OrderBy(o=>o.Name).ToList();
+            List<NoteType> noteTypes = typeContext.Collections().OrderBy(o=>o.Name).ToList();
             List<Note> notes;
             if (codingLanguage == null && noteType==null)
             {
-                notes = noteContext.Collections().ToList();
+                notes = noteContext.Collections().OrderBy(o=>o.dateModified).ToList();
             }
             else if(noteType==null)
             {
-                notes = noteContext.Collections().Where(n => n.CodingLanguage == codingLanguage).ToList();
+                notes = noteContext.Collections().Where(n => n.CodingLanguage == codingLanguage).OrderBy(o => o.dateModified).ToList();
             }
             else if (codingLanguage == null)
             {
-                notes = noteContext.Collections().Where(n => n.NoteType == noteType).ToList();
+                notes = noteContext.Collections().Where(n => n.NoteType == noteType).OrderBy(o => o.dateModified).ToList();
             }
             else
             {
-                notes = noteContext.Collections().Where(n => n.NoteType == noteType).Where(n=>n.CodingLanguage==codingLanguage).ToList();
+                notes = noteContext.Collections().Where(n => n.NoteType == noteType).Where(n=>n.CodingLanguage==codingLanguage).OrderBy(o => o.dateModified).ToList();
             }
             NoteListViewModel viewModel = new NoteListViewModel();
             viewModel.notes = notes;

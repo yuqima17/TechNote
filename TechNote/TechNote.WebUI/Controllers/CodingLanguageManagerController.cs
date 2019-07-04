@@ -20,7 +20,7 @@ namespace TechNote.WebUI.Controllers
         // GET: CodingLanguageManager
         public ActionResult Index()
         {
-                List<CodingLanguage> codingLanguages = context.Collections().ToList();
+                List<CodingLanguage> codingLanguages = context.Collections().OrderBy(o => o.Name).ToList();
                 return View(codingLanguages);
         }
         public ActionResult Create()

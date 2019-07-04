@@ -5,36 +5,44 @@
     ViewBag.Title = "Home";
 }
 
-<h2>Index</h2>
-<ul class="nav navbar-nav">
 
-    @Html.ActionLink("Coding Languages", "Index", "CodingLanguageManager")</li>
-    <li>@Html.ActionLink("Types", "Index", "NoteType")</li>
-    <li>
 
-</ul>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="col-md-2">
-    @Html.ActionLink("All", "Index", null, new { @class = Request["codingLanguage"] == null ? "list-group-item-active" : "list-group-item" })
-    @foreach (var i in Model.codingLanguages)
-    {
-        @Html.ActionLink(i.Name, "Index", new { codingLanguage = i.Name }, new { @class = Request["codingLanguage"] == i.Name ? "list-group-item-active" : "list-group-item" })
-    }
-</div>
-<div class="col-md-10">
-    <div class="col-md-12">
-        @Html.ActionLink("All", "Index")
-        @foreach (var item in Model.noteTypes)
+
+
+
+
+<div class="col-md-3" style="padding:0">
+    <div class="nav flex-column " style="background-color:black;margin-top:0px">
+        <li class="nav-item">
+            <a href="@Url.Action("Index","Home",new { codingLanguage = Request["codingLanguage"] })" class="a-nav-item">All</a>
+
+        </li>
+
+
+        @foreach (var i in Model.noteTypes)
         {
-            <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true">
-                @Html.ActionLink(item.Name, "Index", new { noteType = item.Name, codingLanguage = Request["codingLanguage"] })
-            </button>
 
+            <li class="nav-item">
+                <a href="@Url.Action("Index","Home",new { noteType = i.Name,codingLanguage = Request["codingLanguage"] })" class="a-nav-item">@i.Name</a>
+
+
+            </li>
+        }
+    </div>
+</div>
+
+
+
+<div class="col-md-9">
+    <ul class="list-group list-group-horizontal">
+        <li class="list-group-item" style="display:inline"><a href="@Url.Action("Index","Home",new { noteType=Request["noteType"]})">All</a></li>
+
+        @foreach (var item in Model.codingLanguages)
+        {
+            <li class="list-group-item" style="display:inline"><a href="@Url.Action("Index","Home",new { codingLanguage = item.Name, noteType = Request["noteType"]})">@item.Name</a></li>
         }
 
-    </div>
+    </ul>
     <table class="table">
 
         @for (int i = Model.notes.Count - 1; i >= 0; i--)
@@ -67,3 +75,11 @@
     </table>
 
 </div>
+<ul class="nav navbar-nav">
+    <li>
+        @Html.ActionLink("Coding Languages", "Index", "CodingLanguageManager")
+    </li>
+    <li>@Html.ActionLink("Types", "Index", "NoteType")</li>
+
+
+</ul>
