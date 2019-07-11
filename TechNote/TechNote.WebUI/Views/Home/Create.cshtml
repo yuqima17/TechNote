@@ -3,70 +3,101 @@
 @{
     ViewBag.Title = "Create";
 }
+<div class="col-md-2" style="padding:0">
+    <div class="nav flex-column " style="background-color:black;margin-top:0px" id="nav-nt">
+        <li class="nav-item">
+            <a href="@Url.Action("Index","noteType")" class="a-nav-item">Type Management</a>
+        </li>
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Note</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <li class="nav-item">
 
 
+            <a href="@Url.Action("Index","Home",new { codingLanguage = Request["codingLanguage"] })" class="a-nav-item"><div style="width:10%"><i class="fas fa-code-branch"></i></div><div style="width:90%"> All</div>  </a>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.note.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.note.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.note.Title, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        </li>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.note.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.note.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.note.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.note.NoteContent, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.note.NoteContent, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.note.NoteContent, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.note.CodingLanguage, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.note.CodingLanguage, new SelectList(Model.codingLanguages, "Name", "Name"), new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.note.NoteType, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.note.NoteType, new SelectList(Model.noteTypes, "Name", "Name"), new { htmlAttributes = new { @class = "form-control" } })
+        @foreach (var i in Model.noteTypes)
+        {
 
-        </div>
-    </div>
+            <li class="nav-item">
+                <a href="@Url.Action("Index","Home",new { noteType = i.Name,codingLanguage = Request["codingLanguage"] })" class="a-nav-item"><div style="width:10%"><i class="fas fa-code-branch"></i></div><div style="width:90%">@i.Name</div>   </a>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
+
+            </li>
+        }
     </div>
 </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="col-md-10" style="padding:0">
+    <a href="@Url.Action("Index","Home")" style="font-weight:bold"><i class="fas fa-arrow-left"></i>Back to List</a>
+    <div class="container" style="margin-top:50px">
+        
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.note.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        <textarea data-val="true" data-val-length="The field Title must be a string with a maximum length of 100." data-val-length-max="100" data-val-required="The Title field is required." id="note_Title" name="note.Title" rows="1" class="form-control-desc"></textarea>
+                        @Html.ValidationMessageFor(model => model.note.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.note.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <textarea data-val="true" data-val-length="The field Description must be a string with a maximum length of 300." data-val-length-max="300" id="note_Description" name="note.Description" rows="2" class="form-control-desc"></textarea>
+
+
+                        @Html.ValidationMessageFor(model => model.note.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.note.NoteContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <textarea data-val="true" data-val-length="The field NoteContent must be a string with a maximum length of 2000." data-val-length-max="2000" id="note_NoteContent" name="note.NoteContent" rows="20" class="form-control-desc"></textarea>
+
+                        @Html.ValidationMessageFor(model => model.note.NoteContent, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.note.CodingLanguage, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.note.CodingLanguage, new SelectList(Model.codingLanguages, "Name", "Name"), new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.note.NoteType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.note.NoteType, new SelectList(Model.noteTypes, "Name", "Name"), new { htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+  
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

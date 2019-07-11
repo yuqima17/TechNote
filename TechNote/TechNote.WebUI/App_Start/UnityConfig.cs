@@ -2,7 +2,6 @@ using System;
 using TechNote.Core;
 using TechNote.Core.Contracts;
 using TechNote.Core.Models;
-using TechNote.DataAccess.InMemory;
 using TechNote.DataAccess.SQL;
 using Unity;
 
@@ -46,7 +45,7 @@ namespace TechNote.WebUI
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IRepository<Note>,SQLRepository<Note> >();
+            container.RegisterType<IRepository<Note>, SQLRepository<Note>>();
             container.RegisterType<IRepository<CodingLanguage>, SQLRepository<CodingLanguage>>();
             container.RegisterType<IRepository<NoteUser>, SQLRepository<NoteUser>>();
             container.RegisterType<IRepository<NoteType>, SQLRepository<NoteType>>();

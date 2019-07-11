@@ -6,20 +6,92 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/fontawesome")
     <link href="~/Content/all.css" rel="stylesheet" />
-    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/StyleSheet1.css")
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/main.js"></script>
     <style>
+        body{
+            width:100%;
+            padding:0;
+        }
         .a-nav-item {
             font-weight: bold;
             color: #9d9d9d;
-            font-size:16px;
+            font-size:14px;
+            height:50px;
         }
-        .a-nav-item:active{
-            color:white;
+        .a-nav-item-active {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            height:50px;
         }
+        .nav-item{
+            border:0;
+            height:50px;
+        }
+        #nav-nt a div{
+            display:inline-flex;
+
+        }
+        .list-group-item {
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 0 auto 0 auto;
+            background-color: #d6d4d4;
+            border: 0;
+            color: #337ab7;
+            font-weight: bold;
+        }
+            .list-group-item:hover {
+                background-color: #337ab7;
+            }
+            .list-group-item.active {
+                background-color: #337ab7;
+            }
+        .nt-cl-addTypes {
+            
+            float:right;
+            margin-right:50px;
+        }
+        #div-note {
+            background-color: white;
+            border: 1px solid #f5f5f5;
+            width: 80%;
+        }
+        #div-note h4{
+            padding-top:10px;
+            padding-left:15px;
+            font-size:18px;
+            font-weight:bold;
+        }
+            #div-note #note-Author {
+                padding-left: 15px;
+                font-size: 15px;
+                color: #9d9d9d;
+                font-style: italic;
+            }
+            #div-note #note-Desc {
+                padding-left: 15px;
+                font-size: 15px;
+                color: #9d9d9d;
+            }
+            #div-note #note-Span {
+                padding-right: 15px;
+                padding-top: 15px;
+                font-size: 15px;
+                color: #9d9d9d;
+                font-weight:bold;
+                float:right;
+            }
+            .form-control-desc{
+                
+               width:500px;
+                max-width:500px;
+            }
+        
       
     </style>
 
@@ -35,16 +107,18 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                
+
 
                 <a href="@Url.Action("Index","Home")" class="navbar-brand"><i class="fas fa-laptop-code"></i>&nbsp <span style="font-weight:bold">TechNote</span></a>
 
-                
+
                 &nbsp &nbsp &nbsp &nbsp
                 <a href="@Url.Action("Create","Home")" class="navbar-brand"><span style="font-weight:bold">Create&nbsp</span><i class="fas fa-plus-square"></i></a>
-
+                &nbsp &nbsp
+                
+            
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" style="margin-right:50px">
 
                 @Html.Partial("_LoginPartial")
             </div>
@@ -53,9 +127,9 @@
  
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <footer style="text-align:center;">
+            <p >Tech Note Application by Yuqi</p>
+        </footerstyle="text-align:center;">
 
    
     @Scripts.Render("~/bundles/jquery")
@@ -63,4 +137,7 @@
    
     @RenderSection("scripts", required: false)
 </body>
+<script>
+
+</script>
 </html>

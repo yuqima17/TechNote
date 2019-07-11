@@ -74,11 +74,11 @@ namespace TechNote.WebUI.Controllers
             else
             {
                 NoteUser noteUser = userContext.Collections().FirstOrDefault(i => i.Email == User.Identity.Name);
-                if (noteUser != null)
-                {
-                    n.note.UserEmail = noteUser.Email;
-                }
-                n.note.dateModified = n.note.createdAt.ToString();
+                
+               
+                    n.note.UserEmail = User.Identity.Name;
+                
+                n.note.dateModified = n.note.createdAt;
                 noteContext.Insert(n.note);
                 noteContext.Commit();
                 return RedirectToAction("Index");
@@ -106,6 +106,7 @@ namespace TechNote.WebUI.Controllers
             NoteViewModel viewModel = new NoteViewModel();
             viewModel.note = noteToEdit;
             viewModel.codingLanguages = cContext.Collections().ToList();
+            viewModel.noteTypes = typeContext.Collections().ToList();
             if (noteToEdit == null)
             {
                 return HttpNotFound();
@@ -135,7 +136,7 @@ namespace TechNote.WebUI.Controllers
                 else
                 {
                     noteToEdit.CodingLanguage = n.note.CodingLanguage;
-                    noteToEdit.dateModified = DateTime.Now.ToString();
+                    noteToEdit.dateModified = DateTime.Today.ToString();
                     noteToEdit.Description = n.note.Description;
                     noteToEdit.NoteContent = n.note.NoteContent;
                     noteToEdit.Title = n.note.Title;

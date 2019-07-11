@@ -11,10 +11,17 @@
 
 
 
-<div class="col-md-3" style="padding:0">
-    <div class="nav flex-column " style="background-color:black;margin-top:0px">
+
+<div class="col-md-2" style="padding:0">
+    <div class="nav flex-column " style="background-color:black;margin-top:0px" id="nav-nt">
         <li class="nav-item">
-            <a href="@Url.Action("Index","Home",new { codingLanguage = Request["codingLanguage"] })" class="a-nav-item">All</a>
+            <a href="@Url.Action("Index","noteType")" class="a-nav-item">Type Management</a>
+        </li>
+        
+        <li class="nav-item">
+
+            
+            <a href="@Url.Action("Index","Home",new { codingLanguage = Request["codingLanguage"] })" class="a-nav-item"><div style="width:10%" ><i class="fas fa-code-branch"></i></div><div style="width:90%" > All</div>  </a>
 
         </li>
 
@@ -23,7 +30,7 @@
         {
 
             <li class="nav-item">
-                <a href="@Url.Action("Index","Home",new { noteType = i.Name,codingLanguage = Request["codingLanguage"] })" class="a-nav-item">@i.Name</a>
+                <a href="@Url.Action("Index","Home",new { noteType = i.Name,codingLanguage = Request["codingLanguage"] })" class="a-nav-item"><div style="width:10%"><i class="fas fa-code-branch"></i></div><div style="width:90%">@i.Name</div>   </a>
 
 
             </li>
@@ -33,53 +40,42 @@
 
 
 
-<div class="col-md-9">
-    <ul class="list-group list-group-horizontal">
-        <li class="list-group-item" style="display:inline"><a href="@Url.Action("Index","Home",new { noteType=Request["noteType"]})">All</a></li>
+<div class="col-md-10" style="background-color:#f5f5f5">
+    <div class="container">
+        <div><h3 style="margin-top:40px;margin-bottom:20px">@Request["noteType"] Notes</h3></div>
 
-        @foreach (var item in Model.codingLanguages)
-        {
-            <li class="list-group-item" style="display:inline"><a href="@Url.Action("Index","Home",new { codingLanguage = item.Name, noteType = Request["noteType"]})">@item.Name</a></li>
-        }
+        <ul class="list-group list-group-horizontal">
+            @Html.ActionLink("All", "Index", new { noteType = Request["noteType"] }, new { @Style = "display:inline", @class = Request["codingLanguage"] == null ? "list-group-item active" : "list-group-item" })
 
-    </ul>
-    <table class="table">
 
-        @for (int i = Model.notes.Count - 1; i >= 0; i--)
-        {
-            <tr>
+            @foreach (var item in Model.codingLanguages)
+            {
+                @Html.ActionLink(item.Name, "Index", new { codingLanguage = item.Name, noteType = Request["noteType"] }, new { @Style = "display:inline", @class = Request["codingLanguage"] == item.Name ? "list-group-item active" : "list-group-item" })
 
-                <td>
-                    @Html.DisplayFor(modelItem => Model.notes[i].dateModified)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.notes[i].Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.notes[i].Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.notes[i].NoteContent)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => Model.notes[i].Id)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.notes[i].Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = Model.notes[i].Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = Model.notes[i].Id })
-                </td>
-            </tr>
-        }
+            }
+            <a href="@Url.Action("Index","CodingLanguageManager")" style="display:inline" class = "list-group-item" >Add</a>
+            
+        </ul>
+        <div >
+            @for (int i = 0; i <= Model.notes.Count - 1; i++)
+            {
+                <div id="div-note"  >
+                    <span id="note-Span">@Model.notes[i].NoteType | @Model.notes[i].CodingLanguage</span>
+                    <h4>@Html.ActionLink(@Model.notes[i].Title, "Details", new { id = Model.notes[i].Id }, new { @Id = "note-Title" })</h4>
+                    
+                    <p id="note-Author">Author: @Model.notes[i].UserEmail | Last Modified: @Model.notes[i].dateModified</p>
+                    <p id="note-Desc">@Model.notes[i].Description</p>
+                    
+                    <p style="margin:0;padding-left:15px">
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.notes[i].Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = Model.notes[i].Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.notes[i].Id })
+                    </p>
+                </div>
+            }
+            </div>
 
-    </table>
-
+    </div>
 </div>
-<ul class="nav navbar-nav">
-    <li>
-        @Html.ActionLink("Coding Languages", "Index", "CodingLanguageManager")
-    </li>
-    <li>@Html.ActionLink("Types", "Index", "NoteType")</li>
+    
 
-
-</ul>

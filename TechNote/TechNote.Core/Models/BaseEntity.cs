@@ -10,11 +10,11 @@ namespace TechNote.Core.Models
     {
         public string Id { get; set; }
 
-        public DateTimeOffset createdAt { get; set; }
+        public String createdAt { get; set; }
         public BaseEntity()
         {
             Id = Guid.NewGuid().ToString();
-            createdAt = DateTime.Now;
+            createdAt = DateTime.Today.ToString();
         }
     }
 }

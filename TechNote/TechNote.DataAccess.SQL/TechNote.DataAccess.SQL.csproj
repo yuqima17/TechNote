@@ -73,6 +73,14 @@
     <Compile Include="Migrations\201906292117417_noteType.Designer.cs">
       <DependentUpon>201906292117417_noteType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907062210550_changeDate.cs" />
+    <Compile Include="Migrations\201907062210550_changeDate.Designer.cs">
+      <DependentUpon>201907062210550_changeDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907062216499_ChangeCreateDateType.cs" />
+    <Compile Include="Migrations\201907062216499_ChangeCreateDateType.Designer.cs">
+      <DependentUpon>201907062216499_ChangeCreateDateType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -105,6 +113,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906292117417_noteType.resx">
       <DependentUpon>201906292117417_noteType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907062210550_changeDate.resx">
+      <DependentUpon>201907062210550_changeDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907062216499_ChangeCreateDateType.resx">
+      <DependentUpon>201907062216499_ChangeCreateDateType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
